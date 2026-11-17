@@ -627,6 +627,27 @@ details[open] { padding-bottom: 4px; }
 .act-tag { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; padding: 2px 8px; border-radius: 6px; background: var(--info); color: #fff; white-space: nowrap; }
 html[data-theme="dark"] .act-tag { color: #0b1a33; }
 
+/* ---------- Results ---------- */
+.kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin: 0 0 22px; }
+.kpi { display: flex; flex-direction: column; gap: 2px; padding: 16px; border-radius: var(--r-md); background: linear-gradient(135deg, var(--espresso), #0d2a27); color: #e9e2d8; }
+.kpi-k { font-size: .74rem; font-weight: 700; color: #a7f3e7; letter-spacing: .02em; }
+.kpi-v { font-family: var(--font-mono); font-size: 1.6rem; font-weight: 800; color: #fff; line-height: 1.3; }
+.kpi-d { font-size: .78rem; color: #cfc2b5; }
+.data-table th, .data-table td { text-align: center; }
+.data-table td:first-child, .data-table th:first-child { text-align: left; }
+.data-table thead th { white-space: nowrap; line-height: 1.4; border-left: 1px solid var(--line); }
+.data-table thead th:first-child { border-left: 0; }
+.data-table { font-size: .84rem; }
+.data-table td { padding: 9px 8px; }
+.data-table thead th { padding: 10px 8px; }
+.data-table .mono-code { font-size: .78em; padding: 1px 5px; }
+.row-best td { background: var(--positive-bg); color: var(--ink); }
+.best-chip, .sig-chip { display: inline-block; font-size: .7rem; font-weight: 800; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+.best-chip { background: var(--positive); color: #fff; margin-left: 4px; }
+html[data-theme="dark"] .best-chip { color: #052e16; }
+.sig-yes { background: var(--positive-bg); color: var(--positive); border: 1px solid color-mix(in srgb, var(--positive) 40%, transparent); }
+.sig-no { background: var(--surface-2); color: var(--ink-3); border: 1px solid var(--line-strong); }
+
 /* ---------- SVG tokens ---------- */
 .svg-belt { fill: var(--belt); }
 .svg-white { fill: var(--svg-paper); }
@@ -666,8 +687,9 @@ html[data-theme="dark"] .act-tag { color: #0b1a33; }
     flex: none; text-decoration: none; font-size: .82rem; font-weight: 600; padding: 6px 12px; border-radius: 999px;
     background: var(--surface); border: 1px solid var(--line); color: var(--ink-2);
   }
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-art { display: none; }
+  .hero-grid { grid-template-columns: 1fr; gap: 8px; }
+  .hero-art { order: -1; justify-self: center; width: min(240px, 70%); margin: -6px 0 6px; }
+  .hero-art svg { filter: drop-shadow(0 18px 24px rgba(0,0,0,.45)); }
 }
 @media (max-width: 820px) {
   .key-figures-grid, .pipeline-compare, .calib-grid, .conveyor-sim-grid, .beanscope-layout { grid-template-columns: 1fr; }
@@ -678,6 +700,8 @@ html[data-theme="dark"] .act-tag { color: #0b1a33; }
   .bar-row { grid-template-columns: 1fr; gap: 4px; }
   .brand-text span, .app-chip { display: none; }
   .status-tag { font-size: .66rem; letter-spacing: .08em; }
+  .kpi-row { grid-template-columns: 1fr 1fr; }
+  .kpi-v { font-size: 1.25rem; }
   .chapter-header { gap: 12px; }
   .step-badge { width: 44px; height: 44px; font-size: 1.1rem; }
 }
@@ -903,7 +927,7 @@ html[data-theme="dark"] .act-tag { color: #0b1a33; }
 
         <h3>1.1 เชื่อมโยงสายงาน ADAS เข้ากับชุดฝึก Automated Conveyor Vision Kit</h3>
         <p>
-          ในงานวิจัยด้านระบบนำทางยานยนต์อัตโนมัติ (Phinphimai et al., 2024) ระบบความปลอดภัยจำเป็นต้องตรวจจับวัตถุ ติดตามการเคลื่อนที่ด้วยอัลกอริทึม <strong>DeepSORT</strong> ระบุตำแหน่งด้วย <strong>HD Maps (Lanelet2)</strong> และ <strong>Normal Distribution Transform (NDT)</strong> ภายใต้กรอบการทำงาน <strong>ROS</strong> เพื่อพยากรณ์เส้นทางล่วงหน้า ขณะที่งานวิจัยด้านการแบ่งส่วนถนนยังนำ <strong>YOLOv8-seg</strong> มาเพิ่มเลเยอร์ตรวจจับวัตถุขนาดเล็กและกลไก <strong>ShuffleAttention</strong> เพื่อให้แยกขอบเขตผิวถนนและสิ่งกีดขวางได้แม่นยำ เมื่อนำสถาปัตยกรรม YOLO Segmentation เดียวกันมาประยุกต์บนสายพานลำเลียง <strong>BeanScope</strong> ผู้เรียนจึงสามารถฝึกทำความเข้าใจวงจรตั้งแต่กล้อง 2K แสงควบคุม โมเดล AI จนถึงการบันทึกข้อมูลเชิงสถิติได้อย่างปลอดภัยและวัดผลได้ชัดเจน
+          ในงานวิจัยด้านระบบนำทางยานยนต์อัตโนมัติ (Phinphimai et al., 2024) ระบบความปลอดภัยจำเป็นต้องตรวจจับวัตถุ ติดตามการเคลื่อนที่ด้วยอัลกอริทึม <strong>DeepSORT</strong> ระบุตำแหน่งด้วย <strong>HD Maps (Lanelet2)</strong> และ <strong>Normal Distribution Transform (NDT)</strong> ภายใต้กรอบการทำงาน <strong>ROS</strong> เพื่อพยากรณ์เส้นทางล่วงหน้า ขณะที่งานวิจัยด้านการแบ่งส่วนถนนยังนำ <strong>YOLOv8-seg</strong> มาเพิ่มเลเยอร์ตรวจจับวัตถุขนาดเล็กและกลไก <strong>ShuffleAttention</strong> เพื่อให้แยกขอบเขตผิวถนนและสิ่งกีดขวางได้แม่นยำ (Yang &amp; Rong, 2566) เมื่อนำสถาปัตยกรรม YOLO Segmentation เดียวกันมาประยุกต์บนสายพานลำเลียง <strong>BeanScope</strong> ผู้เรียนจึงสามารถฝึกทำความเข้าใจวงจรตั้งแต่กล้อง 2K แสงควบคุม โมเดล AI จนถึงการบันทึกข้อมูลเชิงสถิติได้อย่างปลอดภัยและวัดผลได้ชัดเจน
         </p>
 
         <div class="lab-panel">
@@ -940,7 +964,7 @@ html[data-theme="dark"] .act-tag { color: #0b1a33; }
 
         <h3>1.2 ประเภทเมล็ดกาแฟที่ระบบจำแนกได้ (5 คลาส)</h3>
         <p>
-          โมเดล <strong>YOLOv8m-seg</strong> และ <strong>YOLOv11m-seg</strong> ผ่านการฝึกสอนด้วยชุดข้อมูลภาพที่ทำ Polygon Mask ด้วยโปรแกรม Labelme (สูงสุด 2,500–2,700 ภาพ) เพื่อวิเคราะห์ทั้งสีและขอบเขตทางกายภาพของเมล็ดกาแฟแบ่งเป็น 5 คลาส ดังนี้
+          โมเดล <strong>YOLOv8m-seg</strong> และ <strong>YOLOv11m-seg</strong> ผ่านการฝึกสอนด้วยชุดข้อมูลภาพที่ทำ Polygon Mask ด้วยโปรแกรม Labelme (เริ่มจาก 500 ภาพ แล้วขยายเป็น 1,250 และ 2,500 ภาพ) เพื่อวิเคราะห์ทั้งสีและขอบเขตทางกายภาพของเมล็ดกาแฟแบ่งเป็น 5 คลาส ดังนี้
         </p>
 
         <div class="table-wrap">
@@ -1374,7 +1398,7 @@ pip install -r requirements.txt</div>
 
         <h3>3.3 การสลับโมเดล YOLOv8m-seg / YOLOv11m-seg และพารามิเตอร์ใน config.py</h3>
         <p>
-          ระบบรองรับการสลับระหว่าง <strong>YOLOv8m-seg</strong> และ <strong>YOLOv11m-seg</strong> เพียงแก้ไขบรรทัด <span class="mono-code">MODEL_PATH</span> ในไฟล์ <span class="mono-code">config.py</span> แล้วรีสตาร์ทโปรแกรม โดยงานวิจัยได้ใช้การวิเคราะห์ความแปรปรวน <strong>ANOVA</strong> ทดสอบผลกระทบของขนาดชุดข้อมูล (เช่น 1,250 vs 2,700 ภาพ) จำนวนรอบเทรน (150 vs 300 epochs) และโครงสร้างโมเดลเพื่อให้ได้น้ำหนักที่แม่นยำที่สุด
+          ระบบรองรับการสลับระหว่าง <strong>YOLOv8m-seg</strong> และ <strong>YOLOv11m-seg</strong> เพียงแก้ไขบรรทัด <span class="mono-code">MODEL_PATH</span> ในไฟล์ <span class="mono-code">config.py</span> แล้วรีสตาร์ทโปรแกรม โดยงานวิจัยได้ใช้การวิเคราะห์ความแปรปรวน <strong>ANOVA</strong> ทดสอบผลกระทบของขนาดชุดข้อมูล (1,250 vs 2,500 ภาพ) จำนวนรอบเทรน (150 vs 300 epochs) และโครงสร้างโมเดลเพื่อให้ได้น้ำหนักที่แม่นยำที่สุด
         </p>
 
         <div class="code-block">MODEL_PATH = r"D:\Met\YOLOv8\runs\segment\Test2_2700img_300ep_yolov11mseg\weights\best.pt"</div>
@@ -1639,19 +1663,82 @@ pip install -r requirements.txt</div>
         </div>
 
         <h3>5.3 ผลการประเมินประสิทธิภาพโมเดล (จากงานวิจัย)</h3>
-        <p>สรุปผลการเทรนและทดสอบโมเดลที่ใช้ในระบบ เพื่อให้ผู้เรียนเห็นหลักฐานเชิงประจักษ์ของความแม่นยำ และเปรียบเทียบผลกับการทวนสอบในหน้างาน (หัวข้อ 5.2)</p>
+        <p>งานวิจัยออกแบบการทดลองแบบ <strong>Full Factorial Design 2×2×2</strong> รวม 8 เงื่อนไข (Test 1–8) แปรผัน 3 ปัจจัย ได้แก่ โมเดล (YOLOv8m-seg / YOLOv11m-seg), จำนวนภาพในชุดข้อมูลฝึก (1,250 / 2,500 ภาพ) และจำนวน Epoch (150 / 300) แล้วทดสอบบนชุดต้นแบบจริงด้วยเมล็ดกาแฟ 16 เมล็ด (Perfect 5 เมล็ด, Defect 11 เมล็ด) เงื่อนไขละ 5 รอบ</p>
+
+        <div class="kpi-row">
+          <div class="kpi"><span class="kpi-k">เงื่อนไขที่ดีที่สุด</span><span class="kpi-v">Test 7</span><span class="kpi-d">YOLOv8m-seg · 2,500 ภาพ · 300 epoch</span></div>
+          <div class="kpi"><span class="kpi-k">Accuracy / Precision / Recall (จริง)</span><span class="kpi-v">100%</span><span class="kpi-d">ครบทั้ง 3 ค่าใน Test 7</span></div>
+          <div class="kpi"><span class="kpi-k">mAP@50-95 (Test 7)</span><span class="kpi-v">0.9545</span><span class="kpi-d">สูงที่สุดในการทดลอง</span></div>
+          <div class="kpi"><span class="kpi-k">เวลาเฉลี่ยต่อถาด 16 เมล็ด</span><span class="kpi-v">643.73 ms</span><span class="kpi-d">เร็วที่สุดในกลุ่มที่แม่นยำสูง</span></div>
+        </div>
+
+        <h4>ผลการเทรนเทียบกับผลทดสอบบนเครื่องจริง (8 เงื่อนไข)</h4>
         <div class="table-wrap">
-          <table>
-            <thead><tr><th>โมเดล</th><th>ชุดข้อมูล / Epochs</th><th>mAP50</th><th>Precision</th><th>Recall</th></tr></thead>
+          <table class="data-table">
+            <thead>
+              <tr><th rowspan="2">Test</th><th rowspan="2">โมเดล</th><th rowspan="2">ภาพ</th><th rowspan="2">Epoch</th><th colspan="2">Precision (%)</th><th colspan="2">Recall (%)</th><th rowspan="2">mAP50<br>เทรน (%)</th><th rowspan="2">Accuracy<br>จริง (%)</th><th rowspan="2">เวลาเฉลี่ย<br>(ms)</th></tr>
+              <tr><th>เทรน</th><th>จริง</th><th>เทรน</th><th>จริง</th></tr>
+            </thead>
             <tbody>
-              <tr><td><span class="mono-code">YOLOv8m-seg</span></td><td>1,250 ภาพ / 150 epochs</td><td colspan="3"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] ใส่ค่าจากผลการเทรน (results.csv) ของ Test1_1250img_150ep_yolov8mseg</span></td></tr>
-              <tr><td><span class="mono-code">YOLOv11m-seg</span></td><td>2,700 ภาพ / 300 epochs</td><td colspan="3"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] ใส่ค่าจากผลการเทรนของ Test2_2700img_300ep_yolov11mseg</span></td></tr>
+              <tr><td><strong>Test 1</strong></td><td><span class="mono-code">YOLOv8m-seg</span></td><td class="num-col">1,250</td><td class="num-col">150</td><td class="num-col">90.42</td><td class="num-col">98.18</td><td class="num-col">93.14</td><td class="num-col">98.18</td><td class="num-col">95.67</td><td class="num-col"><strong>96.25</strong></td><td class="num-col">723.02</td></tr>
+              <tr><td><strong>Test 2</strong></td><td><span class="mono-code">YOLOv11m-seg</span></td><td class="num-col">1,250</td><td class="num-col">150</td><td class="num-col">92.39</td><td class="num-col">100.00</td><td class="num-col">88.27</td><td class="num-col">96.36</td><td class="num-col">90.00</td><td class="num-col"><strong>96.25</strong></td><td class="num-col">615.83</td></tr>
+              <tr><td><strong>Test 3</strong></td><td><span class="mono-code">YOLOv8m-seg</span></td><td class="num-col">1,250</td><td class="num-col">300</td><td class="num-col">96.68</td><td class="num-col">100.00</td><td class="num-col">93.80</td><td class="num-col">100.00</td><td class="num-col">94.31</td><td class="num-col"><strong>100.00</strong></td><td class="num-col">782.15</td></tr>
+              <tr><td><strong>Test 4</strong></td><td><span class="mono-code">YOLOv11m-seg</span></td><td class="num-col">1,250</td><td class="num-col">300</td><td class="num-col">94.68</td><td class="num-col">100.00</td><td class="num-col">91.29</td><td class="num-col">100.00</td><td class="num-col">92.47</td><td class="num-col"><strong>97.50</strong></td><td class="num-col">758.89</td></tr>
+              <tr><td><strong>Test 5</strong></td><td><span class="mono-code">YOLOv8m-seg</span></td><td class="num-col">2,500</td><td class="num-col">150</td><td class="num-col">96.72</td><td class="num-col">94.44</td><td class="num-col">93.74</td><td class="num-col">92.73</td><td class="num-col">94.60</td><td class="num-col"><strong>95.00</strong></td><td class="num-col">752.85</td></tr>
+              <tr><td><strong>Test 6</strong></td><td><span class="mono-code">YOLOv11m-seg</span></td><td class="num-col">2,500</td><td class="num-col">150</td><td class="num-col">95.32</td><td class="num-col">98.18</td><td class="num-col">91.97</td><td class="num-col">98.18</td><td class="num-col">92.82</td><td class="num-col"><strong>93.75</strong></td><td class="num-col">725.78</td></tr>
+              <tr class="row-best"><td><strong>Test 7</strong> <span class="best-chip">ดีที่สุด</span></td><td><span class="mono-code">YOLOv8m-seg</span></td><td class="num-col">2,500</td><td class="num-col">300</td><td class="num-col">97.93</td><td class="num-col">100.00</td><td class="num-col">95.65</td><td class="num-col">100.00</td><td class="num-col">96.67</td><td class="num-col"><strong>100.00</strong></td><td class="num-col">643.73</td></tr>
+              <tr><td><strong>Test 8</strong></td><td><span class="mono-code">YOLOv11m-seg</span></td><td class="num-col">2,500</td><td class="num-col">300</td><td class="num-col">96.99</td><td class="num-col">100.00</td><td class="num-col">94.45</td><td class="num-col">100.00</td><td class="num-col">95.15</td><td class="num-col"><strong>98.75</strong></td><td class="num-col">681.03</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card-grid">
+          <div class="info-card info-card--ok"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><h4>Epoch ส่งผลต่อความแม่นยำโดยตรง</h4><p>เพิ่ม Epoch จาก 150 เป็น 300 ทำให้ Accuracy เฉลี่ยทั้งระบบเพิ่มจาก 95.31% เป็น 99.06% (ประมาณ +3.75 จุดเปอร์เซ็นต์)</p></div>
+          <div class="info-card info-card--warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg></div><h4>ข้อมูลมากแต่ฝึกน้อย = Under-fitting</h4><p>Test 5 และ 6 ใช้ 2,500 ภาพแต่ฝึกเพียง 150 Epoch ได้ Accuracy ต่ำสุด (95% และ 93.75%) เพราะโมเดลยังไม่ลู่เข้า</p></div>
+          <div class="info-card info-card--info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></svg></div><h4>GPU กำหนดความเร็ว ไม่ใช่ความถูกต้อง</h4><p>เวลาประมวลผลกับความแม่นยำแทบไม่สัมพันธ์กัน (สหสัมพันธ์ประมาณ −0.09) ความแม่นยำขึ้นกับปัจจัยด้านซอฟต์แวร์เป็นหลัก</p></div>
+          <div class="info-card info-card--ok"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div><h4>เครื่องจริงเสถียรเทียบเท่าตอนเทรน</h4><p>6 จาก 8 เงื่อนไข (75%) ได้ Precision และ Recall บนเครื่องจริงเท่ากับหรือสูงกว่าตอนเทรน</p></div>
+        </div>
+
+        <h4>ผลการวิเคราะห์ความแปรปรวน (ANOVA) ที่ระดับนัยสำคัญ α = 0.05</h4>
+        <p>เปรียบเทียบผลของแต่ละปัจจัยแบบรายคู่ (ควบคุมปัจจัยอื่นให้คงที่) รวม 12 คู่ พบว่า <strong>9 จาก 12 คู่มีความแตกต่างอย่างมีนัยสำคัญทางสถิติ (p &lt; 0.05)</strong> ยืนยันว่าทั้งสถาปัตยกรรมโมเดล จำนวน Epoch และจำนวนภาพ ล้วนส่งผลต่อประสิทธิภาพของโมเดล</p>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>ปัจจัย</th><th>คู่เปรียบเทียบ</th><th>เงื่อนไขคงที่</th><th>F</th><th>p-value</th><th>ผล</th></tr></thead>
+            <tbody>
+              <tr><td><strong>โมเดล</strong></td><td>Test 1 vs 2</td><td>1,250 ภาพ, 150 epoch</td><td class="num-col">1.382</td><td class="num-col">0.361</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>โมเดล</strong></td><td>Test 3 vs 4</td><td>1,250 ภาพ, 300 epoch</td><td class="num-col">109.32</td><td class="num-col">0.0090</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>โมเดล</strong></td><td>Test 5 vs 6</td><td>2,500 ภาพ, 150 epoch</td><td class="num-col">174.61</td><td class="num-col">0.0057</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>โมเดล</strong></td><td>Test 7 vs 8</td><td>2,500 ภาพ, 300 epoch</td><td class="num-col">51.97</td><td class="num-col">0.0187</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>Epoch</strong></td><td>Test 1 vs 3</td><td>1,250 ภาพ, YOLOv8m-seg</td><td class="num-col">0.660</td><td class="num-col">0.5018</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>Epoch</strong></td><td>Test 2 vs 4</td><td>1,250 ภาพ, YOLOv11m-seg</td><td class="num-col">139.479</td><td class="num-col">0.0071</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>Epoch</strong></td><td>Test 5 vs 7</td><td>2,500 ภาพ, YOLOv8m-seg</td><td class="num-col">43.426</td><td class="num-col">0.0223</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>Epoch</strong></td><td>Test 6 vs 8</td><td>2,500 ภาพ, YOLOv11m-seg</td><td class="num-col">77.287</td><td class="num-col">0.0127</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ</strong></td><td>Test 1 vs 5</td><td>150 epoch, YOLOv8m-seg</td><td class="num-col">0.759</td><td class="num-col">0.4756</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ</strong></td><td>Test 2 vs 6</td><td>150 epoch, YOLOv11m-seg</td><td class="num-col">130.325</td><td class="num-col">0.0076</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ</strong></td><td>Test 3 vs 7</td><td>300 epoch, YOLOv8m-seg</td><td class="num-col">32.530</td><td class="num-col">0.0294</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ</strong></td><td>Test 4 vs 8</td><td>300 epoch, YOLOv11m-seg</td><td class="num-col">123.056</td><td class="num-col">0.0080</td><td><span class="sig-chip sig-yes">มีนัยสำคัญ</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>คู่ที่ไม่มีนัยสำคัญทั้ง 3 คู่ (Test 1 vs 2, 1 vs 3 และ 1 vs 5) มีจุดร่วมคือปัจจัยอื่นยังอยู่ในระดับต่ำ (1,250 ภาพ หรือ 150 Epoch) โมเดลจึงยังเรียนรู้ไม่เต็มที่ ผลของปัจจัยที่ศึกษาจึงยังไม่ปรากฏชัด</p>
+
+        <h4>ปฏิสัมพันธ์ระหว่างปัจจัย (Two-Factor ANOVA With Replication)</h4>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead><tr><th>Interaction</th><th>เงื่อนไขควบคุม</th><th>F</th><th>p-value</th><th>ผล</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Epoch × Model</strong></td><td>จำนวนภาพ = 1,250</td><td class="num-col">0.327</td><td class="num-col">0.5783</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>Epoch × Model</strong></td><td>จำนวนภาพ = 2,500</td><td class="num-col">0.110</td><td class="num-col">0.7457</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ × Model</strong></td><td>Epoch = 150</td><td class="num-col">0.621</td><td class="num-col">0.4461</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ × Model</strong></td><td>Epoch = 300</td><td class="num-col">0.353</td><td class="num-col">0.5637</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ × Epoch</strong></td><td>Model = YOLOv8m-seg</td><td class="num-col">0.058</td><td class="num-col">0.8140</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
+              <tr><td><strong>จำนวนภาพ × Epoch</strong></td><td>Model = YOLOv11m-seg</td><td class="num-col">0.023</td><td class="num-col">0.8819</td><td><span class="sig-chip sig-no">ไม่มีนัยสำคัญ</span></td></tr>
             </tbody>
           </table>
         </div>
         <div class="inset inset--accent">
-          <div class="inset-label">ผลการวิเคราะห์ ANOVA</div>
-          <p class="inset-desc"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] สรุปผล ANOVA ว่าปัจจัยใด (ขนาดชุดข้อมูล / จำนวน epochs / โครงสร้างโมเดล) มีผลต่อความแม่นยำอย่างมีนัยสำคัญ พร้อมค่า p-value</span></p>
+          <div class="inset-label">สรุปผลการวิเคราะห์ ANOVA</div>
+          <p class="inset-desc">ค่า p-value ของ Interaction ทุกกรณีสูงกว่า 0.05 (ต่ำสุด 0.4461) ปัจจัยทั้งสามจึง<strong>ทำงานเป็นอิสระต่อกัน (Additive Effects)</strong> การเพิ่มจำนวนภาพและเพิ่ม Epoch ให้ผลดีขึ้นสะสมกันได้ จึงเลือก YOLOv8m-seg ร่วมกับ 2,500 ภาพ และ 300 Epoch (Test 7) เป็นเงื่อนไขที่เหมาะสมที่สุดสำหรับใช้งานจริง</p>
         </div>
 
         <details>
@@ -1784,11 +1871,6 @@ pip install -r requirements.txt</div>
           <div class="info-card info-card--ok"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.2 2 8 0 5.5-4.8 10-10 10Z"/><path d="M2 21c0-3 1.9-5.4 5.1-6"/></svg></div><h4>ประหยัดพลังงาน</h4><p>ระบบทำงานที่ 12V DC ใช้ Webcam ทั่วไปแทนกล้องอุตสาหกรรม และใช้บอร์ด Arduino แบบโอเพนซอร์ส</p></div>
           <div class="info-card info-card--ok"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="6"/><path d="M18.1 10.4A6 6 0 1 1 10.3 18"/></svg></div><h4>ซอฟต์แวร์ไม่มีค่าลิขสิทธิ์</h4><p>Python, PyQt6, OpenCV และ Ultralytics YOLO เป็นซอฟต์แวร์โอเพนซอร์ส</p></div>
         </div>
-        <div class="inset inset--accent">
-          <div class="inset-label">ต้นทุนการสร้างชุดฝึก</div>
-          <p class="inset-desc"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] ใส่ตารางราคาวัสดุแต่ละรายการและต้นทุนรวม เทียบกับเครื่องคัดแยกเชิงพาณิชย์หรือชุดฝึกที่มีขายทั่วไป</span></p>
-        </div>
-
         <h3>7.4 แนวทางการต่อยอดและขยายผล</h3>
         <div class="card-grid">
           <div class="info-card info-card--info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><h4>ในสถานศึกษา</h4><p>ปรับ <span class="mono-code">GRID_ROWS / COLS</span> ให้ตรงกับถาดแบบอื่น หรือเทรนโมเดลใหม่สำหรับชิ้นงานในรายวิชาอื่น</p></div>
@@ -1798,8 +1880,11 @@ pip install -r requirements.txt</div>
         <h3>7.5 เอกสารอ้างอิง</h3>
         <ol class="ref-list">
           <li>ปราเมศ ฉิมเกื้อ และ อภิสิทธิ์ สวนมะพลับ. (2568). <em>การประยุกต์ใช้กระบวนการ Image Processing และ Machine Learning</em> [ปริญญานิพนธ์]. มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าธนบุรี.</li>
-          <li>Phinphimai et al. (2024). <span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] ใส่ชื่อบทความ แหล่งตีพิมพ์ และ DOI ให้ครบ</span></li>
-          <li>Ultralytics. (2024). <em>Ultralytics YOLO Documentation</em>. https://docs.ultralytics.com</li>
+          <li>Phinphimai et al. (2024). <span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] ใส่ชื่อบทความ แหล่งตีพิมพ์ และ DOI ให้ครบ (ไม่พบในเอกสารอ้างอิงของเล่มปริญญานิพนธ์)</span></li>
+          <li>Yang, C. และ Rong, J. (2566). อัลกอริทึมการแบ่งส่วนถนนที่ปรับปรุงจาก YOLOv8-seg. [ออนไลน์].</li>
+          <li>Gope, H.L., Fukai, H., Ruhad, F.M. and Barman, S. (2024). Comparative analysis of YOLO models for green coffee bean detection and defect classification. <em>Scientific Reports</em>, 14, 28946. https://doi.org/10.1038/s41598-024-78598-7</li>
+          <li>Ultralytics. (ม.ป.ป.). <em>YOLOv8 Models</em>. https://docs.ultralytics.com/models/yolov8</li>
+          <li>Ultralytics. (2567). <em>YOLO11 Models</em>. https://docs.ultralytics.com/models/yolo11</li>
           <li>CAST. (2018). <em>Universal Design for Learning Guidelines version 2.2</em>. https://udlguidelines.cast.org</li>
           <li>Hasso Plattner Institute of Design at Stanford. (n.d.). <em>An Introduction to Design Thinking: Process Guide</em>.</li>
         </ol>
