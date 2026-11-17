@@ -601,6 +601,32 @@ details[open] { padding-bottom: 4px; }
 .back-top.is-visible { opacity: 1; pointer-events: auto; transform: none; }
 .site-footer { text-align: center; font-size: .82rem; color: var(--ink-3); padding: 24px 0 0; }
 
+/* ---------- Curriculum ---------- */
+.course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; margin: 0 0 22px; }
+.course-card {
+  display: flex; flex-direction: column; gap: 4px; padding: 16px 18px; border-radius: var(--r-md);
+  background: linear-gradient(135deg, var(--primary-soft), var(--surface)); border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.course-code { font-family: var(--font-mono); font-size: .82rem; font-weight: 800; color: var(--primary); letter-spacing: .04em; }
+.course-name { font-size: 1.02rem; font-weight: 700; color: var(--ink); }
+.act-list { display: grid; gap: 10px; margin: 0 0 20px; }
+.act-card {
+  display: grid; grid-template-columns: 46px 1fr; gap: 14px; padding: 16px 18px; border-radius: var(--r-md);
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+}
+.act-num {
+  width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+  font-family: var(--font-mono); font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--accent), #92400e);
+}
+.act-body h4 { margin: 2px 0 4px !important; font-size: 1rem; }
+.act-body p { margin: 0 0 10px !important; font-size: .92rem; }
+.act-adas {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; padding: 8px 12px; border-radius: 10px;
+  background: var(--info-bg); font-size: .88rem; color: var(--ink);
+}
+.act-tag { font-family: var(--font-mono); font-size: .72rem; font-weight: 800; padding: 2px 8px; border-radius: 6px; background: var(--info); color: #fff; white-space: nowrap; }
+html[data-theme="dark"] .act-tag { color: #0b1a33; }
+
 /* ---------- SVG tokens ---------- */
 .svg-belt { fill: var(--belt); }
 .svg-white { fill: var(--svg-paper); }
@@ -779,13 +805,60 @@ details[open] { padding-bottom: 4px; }
           <li><span>ปฏิบัติงานด้วยกิจนิสัยที่ปลอดภัย เป็นระเบียบ และรับผิดชอบต่อเครื่องมือ</span></li>
         </ol>
 
-        <h3>0.2 ความสอดคล้องกับหลักสูตรประกาศนียบัตรวิชาชีพ พุทธศักราช 2567 (สอศ.)</h3>
+        <h3>0.2 ความสอดคล้องกับหลักสูตร สอศ. พุทธศักราช 2567</h3>
         <div class="summary-list">
-          <div class="summary-row"><span class="summary-key">หลักสูตร</span><span class="summary-val">ประกาศนียบัตรวิชาชีพ (ปวช.) พุทธศักราช 2567 สำนักงานคณะกรรมการการอาชีวศึกษา</span></div>
-          <div class="summary-row"><span class="summary-key">ประเภทวิชา / สาขาวิชา</span><span class="summary-val"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] ระบุประเภทวิชาและสาขาวิชาที่ใช้สื่อ</span></span></div>
-          <div class="summary-row"><span class="summary-key">รายวิชา (รหัส – ชื่อ)</span><span class="summary-val"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] ระบุรหัสและชื่อรายวิชาตามหลักสูตร ปวช. 2567</span></span></div>
-          <div class="summary-row"><span class="summary-key">สมรรถนะรายวิชาที่สอดคล้อง</span><span class="summary-val"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] คัดลอกสมรรถนะรายวิชาที่ตรงกับวัตถุประสงค์ข้อ 1–7</span></span></div>
-          <div class="summary-row"><span class="summary-key">ระดับชั้น / เวลาเรียน</span><span class="summary-val"><span class="todo-chip">[ข้อมูลที่ต้องเติมเพิ่มจากผู้วิจัย] เช่น ปวช. ชั้นปีที่ … จำนวน … ชั่วโมง</span></span></div>
+          <div class="summary-row"><span class="summary-key">หลักสูตร</span><span class="summary-val">หลักสูตรประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) พุทธศักราช 2567 สำนักงานคณะกรรมการการอาชีวศึกษา (สอศ.)</span></div>
+          <div class="summary-row"><span class="summary-key">สาขาวิชา</span><span class="summary-val"><strong>เทคนิคยานยนต์ไฟฟ้า</strong></span></div>
+          <div class="summary-row"><span class="summary-key">ระดับชั้น</span><span class="summary-val">ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)</span></div>
+        </div>
+        <p>รายวิชาที่สอดคล้อง</p>
+        <div class="course-grid">
+          <div class="course-card"><span class="course-code">30143-2013</span><span class="course-name">งานระบบรถนำทางอัตโนมัติ</span></div>
+          <div class="course-card"><span class="course-code">30143-2001</span><span class="course-name">ความปลอดภัยยานยนต์ไฟฟ้า</span></div>
+        </div>
+
+        <h4>กิจกรรมการเรียนรู้ที่เชื่อมโยงกับระบบช่วยขับขี่ (ADAS)</h4>
+        <div class="act-list">
+          <div class="act-card">
+            <div class="act-num">01</div>
+            <div class="act-body">
+              <h4>ลงมือทำชุดข้อมูลภาพด้วยตนเอง</h4>
+              <p>ผู้เรียนถ่ายภาพโมเดลรถ 3 มิติที่วางบนสายพานจำลองถนน แล้วใช้ Labelme ระบุวัตถุในภาพ เช่น รถยนต์ ไฟจราจร คน และสัตว์</p>
+              <div class="act-adas"><span class="act-tag">ADAS · Data Preparation</span><span>เข้าใจว่าระบบกล้องของรถยนต์อัจฉริยะต้องเริ่มจากการเตรียมข้อมูลภาพที่ดี</span></div>
+            </div>
+          </div>
+          <div class="act-card">
+            <div class="act-num">02</div>
+            <div class="act-body">
+              <h4>เรียนรู้การประมวลผลภาพและฝึกสอน AI</h4>
+              <p>ผู้เรียนฝึกเทรนโมเดล YOLO ด้วย PyTorch แล้วอ่านค่าความแม่นยำ mAP และ Precision จากผลที่ได้</p>
+              <div class="act-adas"><span class="act-tag">ADAS · Model Evaluation</span><span>รู้ว่าจะวัดได้อย่างไรว่า AI แยกสิ่งกีดขวางบนถนนได้แม่นยำแค่ไหน</span></div>
+            </div>
+          </div>
+          <div class="act-card">
+            <div class="act-num">03</div>
+            <div class="act-body">
+              <h4>จำลองมุมมองผู้ขับขี่</h4>
+              <p>ผู้เรียนลองปรับตำแหน่งกล้องให้อยู่ระดับต่ำเหมือนกล้องหน้ารถ แล้วดูผลการตรวจจับวัตถุบนหน้าจอโปรแกรม</p>
+              <div class="act-adas"><span class="act-tag">ADAS · FCW</span><span>เห็นหลักการของระบบเตือนการชนด้านหน้า (Forward Collision Warning: FCW)</span></div>
+            </div>
+          </div>
+          <div class="act-card">
+            <div class="act-num">04</div>
+            <div class="act-body">
+              <h4>สั่งเบรกฉุกเฉินด้วย AI</h4>
+              <p>ผู้เรียนเขียนโปรแกรมให้ Python สื่อสารกับ Arduino เมื่อ AI พบสิ่งกีดขวาง สายพานจะหยุดทันที</p>
+              <div class="act-adas"><span class="act-tag">ADAS · AEB</span><span>จำลองการทำงานของระบบเบรกฉุกเฉินอัตโนมัติ (Autonomous Emergency Braking: AEB)</span></div>
+            </div>
+          </div>
+          <div class="act-card">
+            <div class="act-num">05</div>
+            <div class="act-body">
+              <h4>เก็บและวิเคราะห์ข้อมูลความปลอดภัย</h4>
+              <p>ผู้เรียนเขียนโค้ดให้โปรแกรมบันทึกประวัติการตรวจจับลงไฟล์ CSV เองโดยอัตโนมัติ แล้วนำมาสรุปเป็นสถิติ</p>
+              <div class="act-adas"><span class="act-tag">ADAS · Safety Data</span><span>ฝึกวิเคราะห์ข้อมูลเหตุการณ์ เพื่อนำไปปรับปรุงความปลอดภัยของยานยนต์</span></div>
+            </div>
+          </div>
         </div>
 
         <h3>0.3 แนวทางใช้สื่อในชั้นเรียน (ส่งเสริมการเรียนรู้ด้วยตนเอง)</h3>
